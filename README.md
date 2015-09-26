@@ -23,7 +23,7 @@ Here are the specific requirements:
 
 * <b>run_analysis.R</b> This is the R script that implements the steps to generate the tidy data.
 
-* <b>CodeBook.md</b> Describes the variables, the data, and any transformations or work that was performed to clean up the data.
+* <b>CodeBook.md</b> Describes the raw data and the transformation or work that was performed to clean up the data.
 
 ## A Closer Look On run_analysis.R
 
