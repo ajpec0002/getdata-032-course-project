@@ -9,18 +9,23 @@ datasets.
 Here are the specific requirements:
 
 
-* Merge the train and test datasets
+1. Merge the train and test datasets
 
-* Extract only the measurements on the mean and standard deviation for each measurement. 
+2. Extract only the measurements on the mean and standard deviation for each measurement. 
 
-* Use descriptive activity names to name the activities in the data set
+3. Use descriptive activity names to name the activities in the data set
 
-* Label the data set with descriptive variable names. 
+4. Label the data set with descriptive variable names. 
 
-* Get the average for each variable grouped by activity and subject.
+5. Get the average for each variable grouped by activity and subject.
 
 ## Included Files 
 
 * <b>run_analysis.R</b> This is the R script that implements the steps to generate the tidy data.
 
 * <b>CodeBook.md</b> Describes the variables, the data, and any transformations or work that was performed to clean up the data.
+
+## A Closer Look On run_analysis.R
+
+
+
