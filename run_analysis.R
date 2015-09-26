@@ -85,14 +85,20 @@ getMeanAndStdDataSet <- function(mergedDF) {
   colNamesDF <- gsub("*std\\(\\)*",paste("std",regexReplaceSTR,sep=""),colNamesDF)
   colNamesDF <- gsub("*mean\\(\\)*",paste("mean",regexReplaceSTR,sep=""),colNamesDF)
   
-  # Format the feature column names into a valid one using make.names()
-  colNamesDF <- make.names(colNamesDF, unique = TRUE)
+  # Format the feature column names into a valid one using make.names() and
+  # convert them to uppercase
+  colNamesDF <- toupper(make.names(colNamesDF, unique = TRUE))
+  
+  # Replace "." with "_"
+  colNamesDF <- gsub("\\.","_",colNamesDF)
+  
+  # Added the subject and activity id column names in front
+  # These two columns are also appended with the replace string so they will also be included in the extraction using select(x,contains())
+  colNamesDF <- c(paste("SUBJECT",regexReplaceSTR,sep=""),paste("ACTIVITY_ID",regexReplaceSTR,sep=""),colNamesDF)
   
   
-  # Set the column names for the merged dataset using the formatted columns names from features dataset
-  # The subject and activity id column names are also added in front respectively since the merged dataset already contains these two columns as well
-  # These two columns are also appended with the replace string so they will also be included in the extraction in the next step
-  names(mergedDF) <- c(paste("subject",regexReplaceSTR,sep=""),paste("activity.Id",regexReplaceSTR,sep=""),colNamesDF)
+  # Set the column names for the merged dataset using the formatted column names
+  names(mergedDF) <- colNamesDF
   
   # Select the columns that contains the replace string. 
   # These are the subject, activity id, mean and standard deviation columns
@@ -113,14 +119,14 @@ addActivityName <- function(meanAndStdDF) {
   # Read the activity labels dataset
   activityLabelsDF <- read.table(paste(getwd(),"activity_labels.txt",sep="/"))
   
-  # Set the column names to "activity.Id","activity.Name"
-  names(activityLabelsDF) <- c("activity.Id","activity.Name")
+  # Set the column names to "ACTIVITY_ID","ACTIVITY_NAME"
+  names(activityLabelsDF) <- c("ACTIVITY_ID","ACTIVITY_NAME")
   
   # Merge the mean and std dataset  with the activity labels dataset using the activity id 
-  meanAndStdDF <- merge(meanAndStdDF,activityLabelsDF,by.x="activity.Id",by.y = "activity.Id",all=TRUE)
+  meanAndStdDF <- merge(meanAndStdDF,activityLabelsDF,by.x="ACTIVITY_ID",by.y = "ACTIVITY_ID",all=TRUE)
   
   # Drop the activity id column as it is no longer needed. We only need the activity name
-  meanAndStdDF$activity.Id <- NULL
+  meanAndStdDF$ACTIVITY_ID <- NULL
   
   # Return the mean and std dataset with the activity name included
   meanAndStdDF
@@ -136,11 +142,11 @@ generateTidyData <- function(meanAndStdDF){
   # Set tidy dataset
   tidyDF <- meanAndStdDF %>% 
             # Group by subject and activity name
-            group_by(subject,activity.Name) %>% 
+            group_by(SUBJECT,ACTIVITY_NAME) %>% 
             # Get the mean of each variables
             summarise_each(funs(mean)) %>% 
             # Sort result by subject and activity name
-            arrange(subject,activity.Name)
+            arrange(SUBJECT,ACTIVITY_NAME)
 
   # Tidy data name
   tidyDataFileName <- "tidydata.txt"
