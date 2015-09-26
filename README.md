@@ -29,7 +29,7 @@ Here are the specific requirements:
 
 The R script run_analysis.R consists of several functions that works together to implement the specified requirements for tidy data:
 
-* <b>main()</b> This is the main entry point of the program. 
+* <b>main()</b> This is the main entry point of the program. It calls the sub-functions that process the raw data to generate the required tidy data.
 
 * <b>extractRawData()</b> This function extracts the UCI HAR Dataset.zip in the current working directory. It will try to download the zip file from the url specified in the course project in case the zip file is not present in the current working directory.
 
@@ -40,7 +40,6 @@ The R script run_analysis.R consists of several functions that works together to
   <li>mean: all variables containing "mean()" in the name</li>
   <li>std: all variables containing "std()" in the name</li>
 </ol>
-<br>
 Note: There are other variables with string "mean" or "std" in them but they are excluded. Only the exact match to the condition above is included.<br>
 This function also handles the formatting of the variable names so they will be more readable (requirement # 4).
 
