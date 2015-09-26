@@ -155,9 +155,6 @@ main <- function() {
   
   print("Starting analysis...")
   
-  workDirPath <- "/Users/adrian/tmp"
-  setwd(workDirPath)
-  
   print(paste("Using current working directory :", getwd()))
   
   #Call extractRawData
