@@ -9,11 +9,11 @@ datasets.
 Here are the specific requirements:
 
 
-1. Merge the train and test datasets
+1. Merge the train and test datasets.
 
 2. Extract only the measurements on the mean and standard deviation for each measurement. 
 
-3. Use descriptive activity names to name the activities in the data set
+3. Use descriptive activity names to name the activities in the data set.
 
 4. Label the data set with descriptive variable names. 
 
