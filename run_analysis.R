@@ -66,6 +66,7 @@ getMergedDataSet <- function(dataSetType) {
 # It uses the following logic to determine the mean and standard deviation variables:
 # mean: all variables containing "mean()" in the name
 # std: all variables containing "std()" in the name
+# Note: There are other variables with string "mean" or "std" in them but they are excluded. Only the exact match to the condition above is included.
 getMeanAndStdDataSet <- function(mergedDF) {
   
   print("calling getMeanAndStdDataSet() ...")
@@ -93,13 +94,14 @@ getMeanAndStdDataSet <- function(mergedDF) {
   # These two columns are also appended with the replace string so they will also be included in the extraction in the next step
   names(mergedDF) <- c(paste("subject",regexReplaceSTR,sep=""),paste("activity.Id",regexReplaceSTR,sep=""),colNamesDF)
   
-  # Select the columns that contains the replace string. These are the subject, activity id, mean and standard deviation columns
+  # Select the columns that contains the replace string. 
+  # These are the subject, activity id, mean and standard deviation columns
   meanAndStdDF <- select(mergedDF, contains(regexReplaceSTR))
   
   # Remove the replace string from the column names. They are no longer needed at this point.
   names(meanAndStdDF) <- gsub(regexReplaceSTR,"",names(meanAndStdDF)) 
   
-  # Return the dataset containing the subject, activity id, mean and standard deviation columns
+  # Return the dataset containing the mean and standard deviation columns for each subject and activity id
   meanAndStdDF
 }
 
@@ -117,7 +119,7 @@ addActivityName <- function(meanAndStdDF) {
   # Merge the mean and std dataset  with the activity labels dataset using the activity id 
   meanAndStdDF <- merge(meanAndStdDF,activityLabelsDF,by.x="activity.Id",by.y = "activity.Id",all=TRUE)
   
-  # Drop the activity id column as it is no longer needed.
+  # Drop the activity id column as it is no longer needed. We only need the activity name
   meanAndStdDF$activity.Id <- NULL
   
   # Return the mean and std dataset with the activity name included
@@ -150,7 +152,8 @@ generateTidyData <- function(meanAndStdDF){
 
 }
 
-# The main function
+# The main function.
+# This is the entry point of the program.
 main <- function() {
   
   print("Starting analysis...")
