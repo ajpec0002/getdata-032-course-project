@@ -17,7 +17,7 @@ Here are the specific requirements:
 
 4. Label the data set with descriptive variable names. 
 
-5. Get the average for each variable grouped by activity and subject and write it to a file.
+5. Get the average for each variable grouped by activity and subject and write the output to a file.
 
 ## Included Files 
 
@@ -36,8 +36,11 @@ The R script run_analysis.R consists of several functions that works together to
 * <b>getMergedDataSet()</b> This function combines the X_ (accelerometer and gyroscope readings), y_ (type of activity), and subject_ (the subject performing the activity) variables given the dataset type (either "train" or "test"). This function will be called two times; once for "train" and "test". The two results will then be combined to create the merged dataset specified in requirement # 1.
 
 * <b>getMeanAndStdDataSet()</b> This function extracts the Mean and Standard Deviation variables from the merged dataset (requirement # 2). It uses the following logic to determine the mean and standard deviation variables: <br>
-mean: all variables containing "mean()" in the name<br>
-std: all variables containing "std()" in the name<br>
+<ol>
+  <li>mean: all variables containing "mean()" in the name</li>
+  <li>std: all variables containing "std()" in the name</li>
+</ol>
+<br>
 Note: There are other variables with string "mean" or "std" in them but they are excluded. Only the exact match to the condition above is included.<br>
 This function also handles the formatting of the variable names so they will be more readable (requirement # 4).
 
