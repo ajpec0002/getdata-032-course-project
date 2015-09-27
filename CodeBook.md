@@ -8,9 +8,15 @@ http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartpho
 
 3. Once you downloaded the raw data and extracted it, you will find a file named "features_info.txt" under the main folder. This file contains the description of each variable or feature that was measured in the dataset.
 
-4. The output tidy dataset contains the summary of the mean and standard deviation variables. This is extracted based on the definition of mean and standard deviation in "features_info.txt". 
+4. The output tidy dataset contains the summary of the mean and standard deviation variables. This is extracted based on the definition of mean and standard deviation in "features_info.txt".<br>
+E.g. <br>
+mean(): Mean value<br>
+std(): Standard deviation<br>
 
-Here's a sample extract for subject 1 for activity name "LAYING". It highlights the variable names used and the value format in the tidy dataset.
+The variables were formatted slightly to make them valid R variable names.<br>
+
+
+Here's a sample extract for subject 1 for activity name "LAYING". It highlights the variable names used and the value format in the tidy dataset. Please refer to the "features_info.txt" for the meaning of each measurement variable.<br>
 <table>
 <tr>
 <td><b>Variable Name</b></td>
